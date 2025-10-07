@@ -8,7 +8,9 @@ function DogComponent() {
       try {
         const respuesta = await fetch('https://dog.ceo/api/breeds/image/random/20'); //await para que espere la respuesta de la api
         const datos = await respuesta.json(); 
-        setPerritos(datos); //actualizar el estado de perritos
+        setPerritos(datos.message); //actualizar el estado de perritos
+        console.log(datos);
+
 
       } catch (error) {
         console.error('Error al cargar las imágenes de perros:', error);
@@ -21,7 +23,9 @@ function DogComponent() {
       <>
 
       <button onClick={cargarPerritos}>Cargar Perritos</button>
-      <div>{perritos}</div>
+      {perritos.map((url) => (
+        <img src={url} width={200} />
+      ))}
         
       </>
     )
